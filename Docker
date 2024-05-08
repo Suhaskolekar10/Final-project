@@ -1,0 +1,67 @@
+######################  Basic Docker commands  ##################################
+
+1) sudo apt install docker.io -y            ::--To install the docker on the system
+
+2) sudo systemctl start docker              ::--To start the docker
+
+3) sudo systemctl status docker             ::--To check the status(active or not)
+
+4) sudo systemctl enable docker             ::--To keep docker start always
+
+5) sudo docker pull <image_name>            ::--To download the image to the local machine
+
+6) sudo docker run <image_name>             ::--To make the container of that image
+
+7) sudo docker run -ti <image_name>         ::--To make container interactive with the system
+
+8) sudo docker run --name <cont_name> <image_name>   ::--Give nameto the container that you want
+
+9) sudo docker run -ti --name <cont_name> <img_name> ::--Build running container
+
+10) sudo docker ps                           ::--Check running container
+
+11) sudo docker ps -a                        ::--Shows all running as well as terminating containers
+
+12) sudo docker images                       ::-- Shows all images present in the system
+
+13) sudo docker stop <cont_name>             ::-- Stop the container manualy
+
+14) sudo docker rm <cont_name>               ::-- Remove the container 
+
+15) sudo docker rmi <image_name>             ::-- Delete the image (make sure all the containers are stopped)
+
+####################################################################################################################################################
+Question:-1  Using ubuntu image make a python container
+
+1)sudo docker run --name demo1 -ti ubuntu
+2)apt update -y
+3)apt install python3 -y
+4)sudo docker commit demo1 python3       (demo1::current container name  ;;; python3:-name we want to give to the image)
+5)sudo docker run -ti python3 python3     (docker is run on bash command)
+
+####################################################################################################################################################
+
+Another method to create our own image 
+
+1) sudo nano task1.py
+2) sudo nano Dockerfile                               (cat <file_name> used to check the content of the file)
+[[[
+ROM python
+RUN mkdir /app/
+COPY task1.py /app/
+CMD [ "python","/app/task1.py" ]
+]]]
+3) sudo docker build -t <Give_name> .
+4) sudo docker run -ti --name <img name>
+
+sudo docker inspect <img_name>
+
+##########################################################################################################################################
+
+Port mapping   ::--
+             sudo docker run --name w1 -p 5000:80 -d httpd       ( -p:-port mapping, 5000:-Outer port,  80:inner port,  -d detach mode(background)
+             
+             sudo docker run --name w2 -p 7200:80 -d nginx
+             
+Volume mapping  ::--
+	     
